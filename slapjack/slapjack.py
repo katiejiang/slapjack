@@ -1,3 +1,4 @@
+import sys
 from itertools import cycle
 
 from card import Card, RANKS, CARD_HEIGHT
@@ -61,7 +62,10 @@ class Slapjack:
         """
         self.pile.append(player.play_card())
         self.turn ^= 1
-        self.current_rank = self.rank_iter.next()
+        if sys.version_info[0] < 3:
+            self.current_rank = self.rank_iter.next()
+        else:
+            self.current_rank = next(self.rank_iter)
         self.burn = None
         self.slap = None
 
