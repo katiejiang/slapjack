@@ -1,3 +1,4 @@
+import sys
 import curses
 from curses import wrapper
 
@@ -7,6 +8,8 @@ from slapjack import Slapjack
 
 MESSAGE_HEIGHT = 1
 CURRENT_CALL_HEIGHT = 5
+PLAYER_NAME_0 = 'Player 0'
+PLAYER_NAME_1 = 'Player 1'
 
 REQUIRED_HEIGHT = CARD_HEIGHT               \
               + 1                           \
@@ -16,7 +19,27 @@ REQUIRED_HEIGHT = CARD_HEIGHT               \
               + 1                           \
               + CURRENT_CALL_HEIGHT
 
+def get_player_name(player_num):
+    """
+    Returns player name from user input.
+    The name must have 15 or less characters.
+    If no name is entered (empty string), then the name will just be 'Player [player_num]'.
+    """
+    input_message = 'Please enter a name for Player {}:  '.format(player_num)
+    if sys.version_info[0] < 3:
+        name = raw_input(input_message)
+    else:
+        name = input(input_message)
+    while len(name) > 15:
+        name = input('Please enter a name with 15 or less characters:  ')
+    return name
+
+
 def play(game, screen):
+    """
+    Simulates a game of Slapjack.
+    The game ends with a winner or when "q" is pressed.
+    """
     while True:
         # Clear screen
         screen.clear()
@@ -63,17 +86,18 @@ def play(game, screen):
             return
 
 def main(screen):
-    print("Playing Slapjack...")
     # Clear screen
     screen.clear()
     # Initialize the game
-    game = Slapjack("Katie", "Stephanie")
+    game = Slapjack(PLAYER_NAME_0, PLAYER_NAME_1)
 
     while True:
         slapjack_str = '#####################################\n' \
                      + '#        WELCOME TO SLAPJACK        #\n' \
                      + '#####################################\n\n'
-        instructions_str = 'Press p to play a new game.\nPress q to quit.'
+        player_names_str = 'Player 1: {}\n'.format(PLAYER_NAME_0)   \
+                         + 'Player 2: {}\n'.format(PLAYER_NAME_1)
+        instructions_str = '\nPress p to play a new game.\nPress q to quit.'
         # Set winner message if player 0 or player 1 won
         winner_str = '{} is the winner!\n'.format(game.winner.name.strip()) if game.winner else ''
 
@@ -88,9 +112,13 @@ def main(screen):
             return
         elif c == ord('p'):
             # Play a new game
-            game = Slapjack("Katie", "Stephanie")
+            game = Slapjack(PLAYER_NAME_0, PLAYER_NAME_1)
             play(game, screen)
 
 
 if __name__ == "__main__":
+    # Ask for user to input names
+    print("Playing a game of Slapjack...")
+    PLAYER_NAME_0 = get_player_name(1) or 'Player 1' # 'Player 1' is represented as Player 0 internally
+    PLAYER_NAME_1 = get_player_name(2) or 'Player 2' # 'Player 2' is represented as Player 1 internally
     wrapper(main)

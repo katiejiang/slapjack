@@ -1,6 +1,6 @@
 MENU_HEIGHT = 5
 
-class Player:
+class Player(object):
     """
     A player for the game of Slapjack. Keeps track of name and cards.
     """

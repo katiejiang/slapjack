@@ -1,17 +1,18 @@
 import sys
 from itertools import cycle
 
-from card import Card, RANKS, CARD_HEIGHT
+from card import Card, CARD_HEIGHT, RANKS, NUM_CARDS_IN_DECK
 from player import Player, MENU_HEIGHT
 
-class Slapjack:
+class Slapjack(object):
     """
     A game of Slapjack. Keeps track of players, cards, current rank, and other
     game mechanics.
     """
-    def __init__(self, pname_0, pname_1):
+    def __init__(self, player_name_0, player_name_1):
         cards = Card.generate_deck()
-        self.players = (Player(pname_0, cards[:26]), Player(pname_1, cards[26:]))
+        self.players = (Player(player_name_0, cards[:NUM_CARDS_IN_DECK//2]), \
+                        Player(player_name_1, cards[NUM_CARDS_IN_DECK//2:]))
         self.turn = 0
         self.rank_iter = cycle(RANKS)
         self.current_rank = '--'

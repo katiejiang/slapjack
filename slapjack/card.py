@@ -4,8 +4,10 @@ from enum import Enum
 CARD_HEIGHT = 9
 CARD_WIDTH = 15
 RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+NUM_CARDS_IN_DECK = 52
+NUM_SUITS = 4
 
-class Card:
+class Card(object):
     """
     A card in the game of Slapjack.
     """
@@ -38,7 +40,7 @@ class Card:
         """
         deck = []
         for rank in RANKS:
-            for i in range(4): # 4 suits
+            for i in range(NUM_SUITS):
                 deck.append(Card(rank))
         random.shuffle(deck)
         return deck
