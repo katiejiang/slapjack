@@ -15,6 +15,9 @@ class Card(object):
         self.rank = rank
 
     def display_str(self, screen_width):
+        """
+        Returns a display string for the card.
+        """
         padding = ' ' * max(0, (screen_width - CARD_WIDTH)//2)
         rank_left = self.rank if len(self.rank) == 2 else self.rank + ' '
         rank_right = self.rank if len(self.rank) == 2 else ' ' + self.rank

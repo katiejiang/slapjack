@@ -117,8 +117,8 @@ def main(screen):
 
 
 if __name__ == "__main__":
-    # Ask for user to input names
     print("Playing a game of Slapjack...")
+    # Ask for user to input names
     PLAYER_NAME_0 = get_player_name(1) or 'Player 1' # 'Player 1' is represented as Player 0 internally
     PLAYER_NAME_1 = get_player_name(2) or 'Player 2' # 'Player 2' is represented as Player 1 internally
     wrapper(main)

@@ -13,9 +13,15 @@ class Player(object):
 
     @property
     def num_cards(self):
+        """
+        Returns the number of cards in the player's hand.
+        """
         return len(self.cards)
 
     def play_card(self):
+        """
+        Removes and returns the top card from the player's hand.
+        """
         return self.cards.pop(0)
 
     def __repr__(self):

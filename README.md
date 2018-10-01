@@ -29,3 +29,16 @@ To play a new game of Slapjack, press `p`. To quit the game, press `q`.
 |---------------|---------------|---------------|
 | Play a card   | `z`, `x`, `c` | `,`, `.`, `/` |
 | Slap the pile | `a`, `s`, `d` | `l`, `;`, `'` |
+
+
+### Design Decisions
+
+I created separate `Card`, `Player`, and `Slapjack` classes to modularize my code. Each of the `Card`, `Player`, and `Slapjack` classes store relevant information as instance variables and have methods that generate strings to be displayed on the terminal screen.
+
+The `__main__.py` class is separate from the above classes, and takes care of user input and rendering the game logic as information on the terminal screen.
+
+##### External Python Libraries Used
+* `curses`
+* `enum`
+* `itertools`
+* `random`
